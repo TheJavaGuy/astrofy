@@ -1,0 +1,20 @@
+---
+import { Image } from 'astro:assets';
+---
+
+<div class="w-full max-w-[8.5rem] mx-auto mt-5 mb-6">
+  <a href="/">
+    <div class="avatar transition ease-in-out hover:scale-[111%] block m-auto">
+      <div class="w-full">
+        <Image
+          class="mask mask-circle"
+          format="webp"
+          width={300}
+          height={300}
+          src="/profile.webp"
+          alt="Profile image"
+        />
+      </div>
+    </div>
+  </a>
+</div>

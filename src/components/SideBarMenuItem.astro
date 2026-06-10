@@ -1,0 +1,22 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  id?: string;
+  external?: boolean;
+}
+
+const { href, label, id, external = false } = Astro.props;
+---
+
+<li>
+  <a
+    class="py-3 text-xs @[9rem]:text-sm @[12rem]:text-base whitespace-normal break-words"
+    id={id}
+    href={href}
+    target={external ? '_blank' : undefined}
+    referrerpolicy={external ? 'no-referrer-when-downgrade' : undefined}
+  >
+    {label}
+  </a>
+</li>
