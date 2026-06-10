@@ -4,14 +4,19 @@ interface Props {
   label: string;
   id?: string;
   external?: boolean;
+  active?: boolean;
 }
 
-const { href, label, id, external = false } = Astro.props;
+const { href, label, id, external = false, active = false } = Astro.props;
+
+const baseClass =
+  'py-3 text-xs @[9rem]:text-sm @[11rem]:text-base whitespace-normal break-words';
+const className = active ? `${baseClass} bg-base-300` : baseClass;
 ---
 
 <li>
   <a
-    class="py-3 text-xs @[9rem]:text-sm @[11rem]:text-base whitespace-normal break-words"
+    class={className}
     id={id}
     href={href}
     target={external ? '_blank' : undefined}
