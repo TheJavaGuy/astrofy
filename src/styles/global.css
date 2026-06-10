@@ -5,14 +5,8 @@
 @plugin "daisyui" {
   themes:
     silk --default,
-    dark --prefersdark;
-}
-
-@plugin "daisyui/theme" {
-  name: 'silk';
-  default: true;
-  --color-primary: red;
-  --color-secondary: teal;
+    dark --prefersdark,
+    cupcake;
 }
 
 .time-line-container > div:last-child .education__time > .education__line {
