@@ -10,8 +10,10 @@ interface Props {
 const { href, label, id, external = false, active = false } = Astro.props;
 
 const baseClass =
-  'py-3 text-xs @[9rem]:text-sm @[11rem]:text-base whitespace-normal break-words';
-const className = active ? `${baseClass} bg-base-300` : baseClass;
+  'py-3 text-xs @[9rem]:text-sm @[11rem]:text-base whitespace-normal break-words border border-base-200 transition-colors duration-700 ease-in-out hover:border hover:border-info hover:bg-base-200';
+const className = active
+  ? `${baseClass} bg-base-300 hover:bg-base-300`
+  : baseClass;
 ---
 
 <li>
