@@ -1,11 +1,20 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @plugin "@tailwindcss/typography";
 
 @plugin "daisyui" {
-    themes: lofi --default, dark --prefersdark;
+  themes:
+    silk --default,
+    dark --prefersdark;
+}
+
+@plugin "daisyui/theme" {
+  name: 'silk';
+  default: true;
+  --color-primary: red;
+  --color-secondary: teal;
 }
 
 .time-line-container > div:last-child .education__time > .education__line {
-    display: none;
+  display: none;
 }
