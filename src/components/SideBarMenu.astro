@@ -1,59 +1,21 @@
 ---
+import SideBarMenuItem from './SideBarMenuItem.astro';
 const { sideBarActiveItemID } = Astro.props;
 const activeClass = 'bg-base-300'; // For primary color replace with `active` class
 ---
 
 <ul class="menu grow shrink menu-md overflow-y-auto">
-  <li>
-    <a
-      class="py-3 text-xs @[10rem]:text-sm @[14rem]:text-base whitespace-normal break-words"
-      id="home"
-      href="/">Home Ivan</a
-    >
-  </li>
-  <li>
-    <a
-      class="py-3 text-xs @[10rem]:text-sm @[14rem]:text-base whitespace-normal break-words"
-      id="projects"
-      href="/projects">Projects</a
-    >
-  </li>
-  <li>
-    <a
-      class="py-3 text-xs @[10rem]:text-sm @[14rem]:text-base whitespace-normal break-words"
-      id="services"
-      href="/services">Services</a
-    >
-  </li>
-  <li>
-    <a
-      class="py-3 text-xs @[10rem]:text-sm @[14rem]:text-base whitespace-normal break-words"
-      id="store"
-      href="/store">Store</a
-    >
-  </li>
-  <li>
-    <a
-      class="py-3 text-xs @[10rem]:text-sm @[14rem]:text-base whitespace-normal break-words"
-      id="blog"
-      href="/blog/">Blog</a
-    >
-  </li>
-  <li>
-    <a
-      class="py-3 text-xs @[10rem]:text-sm @[14rem]:text-base whitespace-normal break-words"
-      id="cv"
-      href="/cv">CV</a
-    >
-  </li>
-  <li>
-    <a
-      class="py-3 text-xs @[10rem]:text-sm @[14rem]:text-base whitespace-normal break-words"
-      href="mailto:contact.manuelernestog@gmail.com"
-      target="_blank"
-      referrerpolicy="no-referrer-when-downgrade">Contact</a
-    >
-  </li>
+  <SideBarMenuItem id="home" href="/" label="Home Ivan" />
+  <SideBarMenuItem id="projects" href="/projects" label="Projects" />
+  <SideBarMenuItem id="services" href="/services" label="Services" />
+  <SideBarMenuItem id="store" href="/store" label="Store" />
+  <SideBarMenuItem id="blog" href="/blog/" label="Blog" />
+  <SideBarMenuItem id="cv" href="/cv" label="CV" />
+  <SideBarMenuItem
+    href="mailto:contact.manuelernestog@gmail.com"
+    label="Contact"
+    external
+  />
 </ul>
 
 <script
