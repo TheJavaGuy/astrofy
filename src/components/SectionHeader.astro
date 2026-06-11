@@ -1,0 +1,55 @@
+---
+export interface Props {
+  eyebrow?: string;
+  title: string;
+  actionLabel?: string;
+  actionHref?: string;
+  as?: 'h1' | 'h2' | 'h3';
+}
+
+const {
+  eyebrow,
+  title,
+  actionLabel,
+  actionHref,
+  as: HeadingTag = 'h2',
+} = Astro.props;
+---
+
+<div
+  class="flex items-end justify-between gap-6 mb-6 md:mb-8"
+  data-reveal
+>
+  <div class="flex flex-col gap-2">
+    {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+    <HeadingTag
+      class="font-display text-3xl md:text-4xl font-semibold leading-tight"
+    >
+      {title}
+    </HeadingTag>
+  </div>
+  {
+    actionLabel && actionHref && (
+      <a
+        href={actionHref}
+        class="hidden sm:inline-flex items-center gap-1 text-sm font-medium text-secondary hover:text-primary transition-colors"
+      >
+        {actionLabel}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="14"
+          height="14"
+          aria-hidden="true"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M5 12h14M13 5l7 7-7 7" />
+        </svg>
+      </a>
+    )
+  }
+</div>

@@ -1,16 +1,20 @@
 ---
-import Avatar from './Avatar.astro';
-import SideBarFooter from './SideBarFooter.astro';
+import ProfileCard from './ProfileCard.astro';
 import SideBarMenu from './SideBarMenu.astro';
+import SideBarFooter from './SideBarFooter.astro';
+
 const { sideBarActiveItemID } = Astro.props;
 ---
 
 <div class="drawer-side z-40">
-  <label for="my-drawer" class="drawer-overlay"></label>
+  <label
+    for="my-drawer"
+    class="drawer-overlay"
+    aria-label="Close sidebar"></label>
   <aside
-    class="@container px-2 pt-2 h-auto min-h-full w-48 bg-base-200 text-base-content flex flex-col"
+    class="surface relative h-full min-h-full w-64 flex flex-col gap-2 pt-4 pb-2 border-r border-l-0 border-t-0 border-b-0 rounded-none"
   >
-    <Avatar />
+    <ProfileCard />
     <SideBarMenu sideBarActiveItemID={sideBarActiveItemID} />
     <SideBarFooter />
   </aside>

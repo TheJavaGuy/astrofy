@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HorizontalCard from '../components/HorizontalCard.astro';
+import SectionHeader from '../components/SectionHeader.astro';
 import { getCollection } from 'astro:content';
 import createSlug from '../lib/createSlug';
 
@@ -9,80 +10,113 @@ const posts = (await getCollection('blog')).sort(
 );
 
 const last_posts = posts.slice(0, 3);
+
+const projects = [
+  {
+    title: 'Demo Project 1',
+    img: '/post_img.webp',
+    desc: 'A short summary of the project — what problem it solved, what stack, what outcome. Replace this with real content.',
+    url: '#',
+    badge: 'New',
+  },
+  {
+    title: 'Demo Project 2',
+    img: '/post_img.webp',
+    desc: 'A short summary of the project — what problem it solved, what stack, what outcome. Replace this with real content.',
+    url: '#',
+  },
+  {
+    title: 'Demo Project 3',
+    img: '/post_img.webp',
+    desc: 'A short summary of the project — what problem it solved, what stack, what outcome. Replace this with real content.',
+    url: '#',
+    badge: 'FOSS',
+  },
+];
 ---
 
 <BaseLayout sideBarActiveItemID="home">
-  <div class="pb-12 mt-5">
-    <div class="text-xl py-1">Hey there 👋</div>
-    <div class="text-5xl font-bold">I'm Manuel Ernesto</div>
-    <div class="text-3xl py-3 font-bold">
-      Software Engineer and Entrepreneur
-    </div>
-    <div class="py-2">
-      <text class="text-lg">
-        This is <b>Astrofy</b> a free and open-source template for your Personal Portfolio
-        Website built with Astro and TailwindCSS. Create in minutes a website with
-        Blog, CV, Project Section, Store and RSS Feed. I hope you find it useful!
-      </text>
-    </div>
-    <div class="mt-8">
-      <a class="btn" href="https://twitter.com/manuelernestog" target="_blank">
-        Let's connect!</a
+  <section
+    class="relative isolate pt-8 pb-16 md:pt-14 md:pb-24"
+    aria-labelledby="hero-title"
+  >
+    <span class="hero-blob -top-20 -right-20" aria-hidden="true"></span>
+
+    <div class="relative flex flex-col gap-5 max-w-[60ch]">
+      <span class="eyebrow" data-reveal>Personal blog · Engineering &amp; craft</span>
+      <h1
+        id="hero-title"
+        class="font-display text-[clamp(2.5rem,6vw,4.5rem)] font-bold leading-[1.04] tracking-tight"
+        data-reveal
       >
-      <a
-        href="https://github.com/manuelernestog/astrofy"
-        target="_blank"
-        class="btn btn-outline ml-5"
-      >
-        Get This template
-      </a>
+        I'm Manuel Ernesto.
+        <span class="block text-primary">Software engineer and entrepreneur.</span>
+      </h1>
+      <p class="text-lg md:text-xl text-secondary leading-relaxed" data-reveal>
+        I write about software, the craft of building things, and the messy
+        middle of growing a small business. This site collects projects,
+        writing, and a few things for sale.
+      </p>
+      <div class="flex flex-wrap gap-3 mt-2" data-reveal>
+        <a
+          class="btn btn-primary rounded-full px-5 shadow-soft-sm"
+          href="mailto:contact.manuelernestog@gmail.com"
+        >
+          Let's connect
+        </a>
+        <a
+          class="btn btn-ghost rounded-full px-5 border border-base-300/80 hover:border-primary hover:text-primary"
+          href="/cv"
+        >
+          View résumé
+        </a>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <div>
-    <div class="text-3xl w-full font-bold mb-2">My last projects {'</>'}</div>
-  </div>
+  <section class="mt-12 md:mt-16" aria-labelledby="projects-title">
+    <SectionHeader
+      eyebrow="Selected work"
+      title="Recent projects"
+      actionLabel="All projects"
+      actionHref="/projects"
+    />
+    <div class="flex flex-col gap-4">
+      {
+        projects.map((p) => (
+          <HorizontalCard
+            title={p.title}
+            img={p.img}
+            desc={p.desc}
+            url={p.url}
+            badge={p.badge}
+          />
+        ))
+      }
+    </div>
+  </section>
 
-  <HorizontalCard
-    title="Demo Project 1"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-    badge="NEW"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Demo Project 2"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Demo Project 3"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-    badge="FOSS"
-  />
-
-  <div>
-    <div class="text-3xl w-full font-bold mb-5 mt-10">Latest from blog</div>
-  </div>
-
-  {
-    last_posts.map((post) => (
-      <>
-        <HorizontalCard
-          title={post.data.title}
-          img={post.data.heroImage}
-          desc={post.data.description}
-          url={'/blog/' + createSlug(post.data.title, post.id)}
-          target="_self"
-          badge={post.data.badge}
-        />
-        <div class="divider my-0" />
-      </>
-    ))
-  }
+  <section class="mt-16 md:mt-24" aria-labelledby="writing-title">
+    <SectionHeader
+      eyebrow="Writing"
+      title="From the blog"
+      actionLabel="All posts"
+      actionHref="/blog/"
+    />
+    <div class="flex flex-col gap-4">
+      {
+        last_posts.map((post) => (
+          <HorizontalCard
+            title={post.data.title}
+            img={post.data.heroImage}
+            desc={post.data.description}
+            url={'/blog/' + createSlug(post.data.title, post.id)}
+            target="_self"
+            badge={post.data.badge}
+            tags={post.data.tags as string[] | undefined}
+          />
+        ))
+      }
+    </div>
+  </section>
 </BaseLayout>

@@ -16,11 +16,15 @@ const {
   image = '/social_img.webp',
   ogType = 'website',
 } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 ---
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="theme-color" content="oklch(99% 0.003 250)" />
+<meta name="color-scheme" content="light" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <meta name="generator" content={Astro.generator} />
 
@@ -28,6 +32,7 @@ const {
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={ogType} />
@@ -42,3 +47,16 @@ const {
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+<!-- RSS feed -->
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title={title}
+  href={new URL('/rss.xml', Astro.site ?? Astro.url)}
+/>
+
+<!-- Enable JS-only reveal styles before first paint -->
+<script is:inline>
+  document.documentElement.classList.add('js');
+</script>

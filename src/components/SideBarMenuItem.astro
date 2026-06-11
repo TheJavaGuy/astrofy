@@ -1,29 +1,46 @@
 ---
+import { Icon } from 'astro-iconset/components';
+
 interface Props {
   href: string;
   label: string;
+  icon: string;
   id?: string;
   external?: boolean;
   active?: boolean;
 }
 
-const { href, label, id, external = false, active = false } = Astro.props;
-
-const baseClass =
-  'py-2 my-0.5 text-xs @[9rem]:text-sm @[11rem]:text-base whitespace-normal break-words border border-base-200 transition-colors duration-700 ease-in-out hover:border hover:border-info hover:bg-base-200';
-const className = active
-  ? `${baseClass} bg-base-300 hover:bg-base-300`
-  : baseClass;
+const {
+  href,
+  label,
+  icon,
+  id,
+  external = false,
+  active = false,
+} = Astro.props;
 ---
 
 <li>
   <a
-    class={className}
     id={id}
     href={href}
+    class="sidebar-link"
+    data-active={active ? 'true' : 'false'}
+    aria-current={active ? 'page' : undefined}
     target={external ? '_blank' : undefined}
-    referrerpolicy={external ? 'no-referrer-when-downgrade' : undefined}
+    rel={external ? 'noopener noreferrer' : undefined}
   >
-    {label}
+    <Icon name={icon} size={18} aria-hidden="true" />
+    <span>{label}</span>
+    {
+      external && (
+        <Icon
+          name="mdi:arrow-top-right"
+          size={12}
+          class="ml-auto text-secondary"
+          aria-hidden="true"
+        />
+      )
+    }
   </a>
 </li>

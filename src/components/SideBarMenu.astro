@@ -1,19 +1,66 @@
 ---
 import SideBarMenuItem from './SideBarMenuItem.astro';
 const { sideBarActiveItemID } = Astro.props;
-const isActive = (id: string) => id === sideBarActiveItemID;
+
+interface NavItem {
+  id?: string;
+  href: string;
+  label: string;
+  icon: string;
+  external?: boolean;
+}
+
+const items: NavItem[] = [
+  { id: 'home', href: '/', label: 'Home', icon: 'mdi:home-outline' },
+  {
+    id: 'projects',
+    href: '/projects',
+    label: 'Projects',
+    icon: 'mdi:cube-outline',
+  },
+  {
+    id: 'services',
+    href: '/services',
+    label: 'Services',
+    icon: 'mdi:hand-heart-outline',
+  },
+  {
+    id: 'store',
+    href: '/store',
+    label: 'Store',
+    icon: 'mdi:storefront-outline',
+  },
+  {
+    id: 'blog',
+    href: '/blog/',
+    label: 'Blog',
+    icon: 'mdi:notebook-edit-outline',
+  },
+  { id: 'cv', href: '/cv', label: 'CV', icon: 'mdi:file-account-outline' },
+  {
+    href: 'mailto:contact.manuelernestog@gmail.com',
+    label: 'Contact',
+    icon: 'mdi:email-outline',
+    external: true,
+  },
+];
+
+const isActive = (id?: string) => Boolean(id && id === sideBarActiveItemID);
 ---
 
-<ul class="menu grow shrink menu-md overflow-y-auto">
-  <SideBarMenuItem id="home" href="/" label="Home Ivan" active={isActive('home')} />
-  <SideBarMenuItem id="projects" href="/projects" label="Projects" active={isActive('projects')} />
-  <SideBarMenuItem id="services" href="/services" label="Services" active={isActive('services')} />
-  <SideBarMenuItem id="store" href="/store" label="Store" active={isActive('store')} />
-  <SideBarMenuItem id="blog" href="/blog/" label="Blog" active={isActive('blog')} />
-  <SideBarMenuItem id="cv" href="/cv" label="CV" active={isActive('cv')} />
-  <SideBarMenuItem
-    href="mailto:contact.manuelernestog@gmail.com"
-    label="Contact"
-    external
-  />
-</ul>
+<nav class="px-4 flex-1 overflow-y-auto" aria-label="Primary">
+  <ul class="flex flex-col gap-0.5">
+    {
+      items.map((item) => (
+        <SideBarMenuItem
+          id={item.id}
+          href={item.href}
+          label={item.label}
+          icon={item.icon}
+          external={item.external ?? false}
+          active={isActive(item.id)}
+        />
+      ))
+    }
+  </ul>
+</nav>

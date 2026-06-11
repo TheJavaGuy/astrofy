@@ -1,109 +1,136 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
 import TimeLineElement from '../components/cv/TimeLine.astro';
+
+const skills = [
+  'TypeScript',
+  'JavaScript',
+  'React',
+  'Node.js',
+  'Astro',
+  'Tailwind',
+  'PostgreSQL',
+  'Docker',
+  'AWS',
+  'CI/CD',
+  'GraphQL',
+  'REST',
+  'Testing',
+  'Accessibility',
+  'Performance',
+];
+
+const certifications = [
+  { name: 'Certification Name', href: '#' },
+  { name: 'Certification Name', href: '#' },
+];
 ---
 
 <BaseLayout title="Resume" sideBarActiveItemID="cv">
-  <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Profile</div>
-  </div>
-
-  <div class="mb-10 text-justify">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-    non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </div>
-
-  <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Education</div>
-  </div>
-
-  <div class="time-line-container grid gap-4 mb-10">
-    <TimeLineElement
-      title="Title Name"
-      subtitle="[start year] to [end year] at [Study Center Name], [City], [Country]"
-    />
-    <TimeLineElement
-      title="Title Name"
-      subtitle="[start year] to [end year] at [Study Center Name], [City], [Country]"
-    />
-  </div>
-
-  <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Experience</div>
-  </div>
-
-  <div class="time-line-container mb-10">
-    <TimeLineElement
-      title="Job Title at Project or Company Name"
-      subtitle="From [Start Date] to [End Date] at [Company], [City], [Country]"
+  <section class="pt-4 pb-10" data-reveal>
+    <span class="eyebrow">About</span>
+    <h1
+      class="font-display text-4xl md:text-5xl font-bold tracking-tight mt-2 mb-6 leading-[1.08]"
+    >
+      Resume
+    </h1>
+    <p
+      class="text-base md:text-lg text-base-content/85 leading-relaxed max-w-[68ch]"
     >
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
       veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
       commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident.
-    </TimeLineElement>
-    <TimeLineElement
-      title="Job Title at Project or Company Name"
-      subtitle="From [Start Date] to [End Date] at [Company], [City], [Country]"
-    >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident.
-    </TimeLineElement>
-    <TimeLineElement
-      title="Job Title at Project or Company Name"
-      subtitle="From [Start Date] to [End Date] at [Company], [City], [Country]"
-    >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident.
-    </TimeLineElement>
-  </div>
+      velit esse cillum dolore eu fugiat nulla pariatur.
+    </p>
+  </section>
 
-  <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Certifications</div>
-  </div>
+  <section class="mt-12">
+    <SectionHeader eyebrow="Studies" title="Education" />
+    <div class="time-line-container">
+      <TimeLineElement
+        title="Title Name"
+        subtitle="[start year] to [end year] · [Study Center Name], [City], [Country]"
+      />
+      <TimeLineElement
+        title="Title Name"
+        subtitle="[start year] to [end year] · [Study Center Name], [City], [Country]"
+      />
+    </div>
+  </section>
 
-  <ul class="list-disc mx-6 mb-10 grid gap-2">
-    <li>
-      <a href="#" target="_blank"> Certification Name (with link)</a>
-    </li>
-    <li>
-      <a href="#" target="_blank"> Certification Name (with link)</a>
-    </li>
-  </ul>
+  <section class="mt-12">
+    <SectionHeader eyebrow="Career" title="Experience" />
+    <div class="time-line-container">
+      <TimeLineElement
+        title="Job Title at Project or Company Name"
+        subtitle="From [Start Date] to [End Date] · [Company], [City], [Country]"
+      >
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+        ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+        aliquip ex ea commodo consequat.
+      </TimeLineElement>
+      <TimeLineElement
+        title="Job Title at Project or Company Name"
+        subtitle="From [Start Date] to [End Date] · [Company], [City], [Country]"
+      >
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+        ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+        aliquip ex ea commodo consequat.
+      </TimeLineElement>
+      <TimeLineElement
+        title="Job Title at Project or Company Name"
+        subtitle="From [Start Date] to [End Date] · [Company], [City], [Country]"
+      >
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+        ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+        aliquip ex ea commodo consequat.
+      </TimeLineElement>
+    </div>
+  </section>
 
-  <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Skills</div>
-  </div>
+  <section class="mt-12">
+    <SectionHeader eyebrow="Credentials" title="Certifications" />
+    <ul class="grid sm:grid-cols-2 gap-3" data-reveal>
+      {
+        certifications.map((c) => (
+          <li>
+            <a
+              href={c.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="card-hover flex items-center justify-between gap-3 p-4 rounded-xl border border-base-300/80 bg-base-100/70 hover:text-primary"
+            >
+              <span class="font-medium">{c.name}</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M7 17L17 7M9 7h8v8" />
+              </svg>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
 
-  <ul class="list-disc md:columns-5 columns-2 mx-6">
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-  </ul>
+  <section class="mt-12 mb-10">
+    <SectionHeader eyebrow="Toolbox" title="Skills" />
+    <ul class="flex flex-wrap gap-2" data-reveal>
+      {skills.map((s) => <li><span class="skill-pill">{s}</span></li>)}
+    </ul>
+  </section>
 </BaseLayout>

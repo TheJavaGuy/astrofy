@@ -7,6 +7,15 @@ import { ClientRouter } from 'astro:transitions';
 
 import { SITE_TITLE, SITE_DESCRIPTION, TRANSITION_API } from '../config';
 
+interface Props {
+  image?: string;
+  title?: string;
+  description?: string;
+  includeSidebar?: boolean;
+  sideBarActiveItemID?: string;
+  ogType?: string;
+}
+
 const {
   image,
   title = SITE_TITLE,
@@ -24,18 +33,24 @@ const {
       title={title}
       description={description}
       image={image}
-      ,
       ogType={ogType}
     />
     {TRANSITION_API && <ClientRouter />}
   </head>
   <body>
-    <div class="bg-base-100 drawer lg:drawer-open">
+    <div class="drawer lg:drawer-open">
       <input id="my-drawer" type="checkbox" class="drawer-toggle" />
-      <div class="drawer-content bg-base-100">
+      <div class="drawer-content relative">
+        <div
+          class="bg-grid-dots absolute inset-0 -z-10"
+          aria-hidden="true"
+        >
+        </div>
         <Header title={SITE_TITLE} />
         <div class="md:flex md:justify-center">
-          <main class="p-6 pt-10 lg:max-w-[900px] max-w-[100vw]">
+          <main
+            class="relative w-full px-5 md:px-8 pt-8 md:pt-14 pb-16 max-w-[100vw] lg:max-w-[1100px]"
+          >
             <slot />
           </main>
         </div>
@@ -43,5 +58,29 @@ const {
       </div>
       {includeSidebar && <SideBar sideBarActiveItemID={sideBarActiveItemID} />}
     </div>
+
+    <script>
+      function setupReveal() {
+        const els = document.querySelectorAll<HTMLElement>('[data-reveal]');
+        if (!('IntersectionObserver' in window) || els.length === 0) {
+          els.forEach((el) => el.classList.add('is-revealed'));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-revealed');
+                obs.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: '0px 0px -10% 0px', threshold: 0.05 },
+        );
+        els.forEach((el) => io.observe(el));
+      }
+      setupReveal();
+      document.addEventListener('astro:page-load', setupReveal);
+    </script>
   </body>
 </html>

@@ -1,6 +1,9 @@
 ---
 import { type BlogSchema } from '../content.config';
 import BaseLayout from './BaseLayout.astro';
+import ReadingProgress from '../components/ReadingProgress.astro';
+import Tag from '../components/Tag.astro';
+import { Image } from 'astro:assets';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 
@@ -17,55 +20,126 @@ const {
 } = Astro.props;
 dayjs.extend(localizedFormat);
 const displayDate = dayjs(pubDate).format('ll');
-import { Image } from 'astro:assets';
+const updatedDisplay = updatedDate ? dayjs(updatedDate).format('ll') : null;
 ---
 
 <BaseLayout
   title={title}
   description={description}
   image={heroImage}
-  ,
   ogType="article"
 >
-  <main class="md:flex md:justify-center">
-    <article class="prose prose-lg max-w-[750px] prose-img:mx-auto">
+  <ReadingProgress />
+
+  <article class="relative mx-auto max-w-[820px]">
+    <header class="mb-10" data-reveal>
+      <div class="flex flex-wrap items-center gap-3 mb-5 text-sm text-secondary">
+        <a
+          href="/blog/"
+          class="inline-flex items-center gap-1 hover:text-primary transition-colors"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="14"
+            height="14"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          Blog
+        </a>
+        <span class="text-base-300" aria-hidden="true">·</span>
+        <time datetime={pubDate.toISOString?.()}>{displayDate}</time>
+        {badge && <span class="badge-soft">{badge}</span>}
+      </div>
+
+      <h1
+        class="font-display text-4xl md:text-5xl font-bold leading-[1.08] tracking-tight mb-5"
+      >
+        {title}
+      </h1>
+
+      {description && <p class="text-lg md:text-xl text-secondary max-w-[60ch] leading-relaxed">{description}</p>}
+
       {
-        heroImage && (
-          <Image
-            width={750}
-            height={422}
-            format="webp"
-            src={heroImage}
-            alt={title}
-            class="w-full mb-6"
-          />
-        )
-      }
-      <h1 class="title my-2 text-4xl font-bold">{title}</h1>
-      {pubDate && <time>{displayDate}</time>}
-      <br />
-      {badge && <div class="badge badge-secondary my-1">{badge}</div>}
-      {
-        tags &&
-          tags.map((tag) => (
-            <a
-              href={`/blog/tag/${tag}`}
-              class="badge badge-outline ml-2 no-underline"
-            >
-              {tag}
-            </a>
-          ))
-      }
-      {
-        updatedDate && (
-          <div>
-            {' '}
-            Last updated on <time>{updatedDate}</time>{' '}
+        tags && tags.length > 0 && (
+          <div class="flex flex-wrap gap-1.5 mt-6">
+            {tags.map((tag) => (
+              <Tag label={tag} href={`/blog/tag/${tag}`} />
+            ))}
           </div>
         )
       }
-      <div class="divider my-2"></div>
+    </header>
+
+    {
+      heroImage && (
+        <figure
+          class="relative mb-10 overflow-hidden rounded-2xl ring-1 ring-base-300/70 shadow-soft-md"
+          data-reveal
+        >
+          <Image
+            width={1500}
+            height={844}
+            format="webp"
+            src={heroImage}
+            alt={title}
+            class="w-full h-auto"
+          />
+        </figure>
+      )
+    }
+
+    <div class="prose md:prose-lg prose-img:rounded-xl mx-auto" data-reveal>
       <slot />
-    </article>
-  </main>
+    </div>
+
+    {
+      updatedDisplay && (
+        <p class="mt-10 text-sm text-secondary italic">
+          Last updated <time>{updatedDisplay}</time>
+        </p>
+      )
+    }
+
+    <footer
+      class="mt-16 pt-8 border-t border-base-300/70 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between"
+    >
+      <a
+        href="/blog/"
+        class="inline-flex items-center gap-1.5 text-sm font-medium text-secondary hover:text-primary transition-colors"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M19 12H5M12 19l-7-7 7-7" />
+        </svg>
+        Back to all posts
+      </a>
+      {
+        tags && tags.length > 0 && (
+          <div class="flex flex-wrap gap-1.5">
+            {tags.map((tag) => (
+              <Tag label={tag} href={`/blog/tag/${tag}`} />
+            ))}
+          </div>
+        )
+      }
+    </footer>
+  </article>
 </BaseLayout>
