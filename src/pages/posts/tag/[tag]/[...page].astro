@@ -31,7 +31,7 @@ const params = Astro.params;
 <BaseLayout title={'Blog · ' + params.tag} sideBarActiveItemID="blog">
   <header class="pt-4 pb-8" data-reveal>
     <a
-      href="/blog/"
+      href="/posts/"
       class="inline-flex items-center gap-1 text-sm text-secondary hover:text-primary transition-colors mb-4"
     >
       <svg
@@ -73,7 +73,7 @@ const params = Astro.params;
             title={post.data.title}
             img={post.data.heroImage}
             desc={post.data.description}
-            url={'/blog/' + createSlug(post.data.title, post.id)}
+            url={'/posts/' + createSlug(post.data.title, post.id)}
             target="_self"
             badge={post.data.badge}
             tags={post.data.tags}

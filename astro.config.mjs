@@ -7,7 +7,7 @@ import iconset from 'astro-iconset';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://astrofy-template.netlify.app',
+  site: 'https://thejavaguy.org',
   integrations: [mdx(), sitemap(), iconset()],
   vite: {
     plugins: [tailwindcss()],

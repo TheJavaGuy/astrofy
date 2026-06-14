@@ -35,7 +35,7 @@ const updatedDisplay = updatedDate ? dayjs(updatedDate).format('ll') : null;
     <header class="mb-10" data-reveal>
       <div class="flex flex-wrap items-center gap-3 mb-5 text-sm text-secondary">
         <a
-          href="/blog/"
+          href="/posts/"
           class="inline-flex items-center gap-1 hover:text-primary transition-colors"
         >
           <svg
@@ -71,7 +71,7 @@ const updatedDisplay = updatedDate ? dayjs(updatedDate).format('ll') : null;
         tags && tags.length > 0 && (
           <div class="flex flex-wrap gap-1.5 mt-6">
             {tags.map((tag) => (
-              <Tag label={tag} href={`/blog/tag/${tag}`} />
+              <Tag label={tag} href={`/posts/tag/${tag}`} />
             ))}
           </div>
         )
@@ -112,7 +112,7 @@ const updatedDisplay = updatedDate ? dayjs(updatedDate).format('ll') : null;
       class="mt-16 pt-8 border-t border-base-300/70 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between"
     >
       <a
-        href="/blog/"
+        href="/posts/"
         class="inline-flex items-center gap-1.5 text-sm font-medium text-secondary hover:text-primary transition-colors"
       >
         <svg
@@ -135,7 +135,7 @@ const updatedDisplay = updatedDate ? dayjs(updatedDate).format('ll') : null;
         tags && tags.length > 0 && (
           <div class="flex flex-wrap gap-1.5">
             {tags.map((tag) => (
-              <Tag label={tag} href={`/blog/tag/${tag}`} />
+              <Tag label={tag} href={`/posts/tag/${tag}`} />
             ))}
           </div>
         )
