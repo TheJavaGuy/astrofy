@@ -5,7 +5,7 @@ import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import HorizontalCard from '../../../../components/HorizontalCard.astro';
 import Pagination from '../../../../components/Pagination.astro';
 import { getCollection } from 'astro:content';
-import createSlug from '../../../../lib/createSlug';
+import { postHref, postsHref } from '../../../../lib/routes';
 
 export const getStaticPaths = (async ({ paginate }) => {
   const all_posts = await getCollection('blog');
@@ -31,7 +31,7 @@ const params = Astro.params;
 <BaseLayout title={'Blog · ' + params.tag} sideBarActiveItemID="blog">
   <header class="pt-4 pb-8" data-reveal>
     <a
-      href="/posts/"
+      href={postsHref}
       class="inline-flex items-center gap-1 text-sm text-secondary hover:text-primary transition-colors mb-4"
     >
       <svg
@@ -73,7 +73,7 @@ const params = Astro.params;
             title={post.data.title}
             img={post.data.heroImage}
             desc={post.data.description}
-            url={'/posts/' + createSlug(post.data.title, post.id)}
+            url={postHref(post.id)}
             target="_self"
             badge={post.data.badge}
             tags={post.data.tags}

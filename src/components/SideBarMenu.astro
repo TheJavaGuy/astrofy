@@ -1,5 +1,6 @@
 ---
 import SideBarMenuItem from './SideBarMenuItem.astro';
+import { postsHref } from '../lib/routes';
 const { sideBarActiveItemID } = Astro.props;
 
 interface NavItem {
@@ -32,7 +33,7 @@ const items: NavItem[] = [
   },
   {
     id: 'blog',
-    href: '/posts/',
+    href: postsHref,
     label: 'Blog',
     icon: 'mdi:notebook-edit-outline',
   },

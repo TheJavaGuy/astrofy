@@ -23,7 +23,7 @@ const {
 } = Astro.props;
 
 const tagBase = url.includes('/')
-  ? url.split('/').slice(0, -1).join('/') + '/tag'
+  ? url.replace(/\/$/, '').split('/').slice(0, -1).join('/') + '/tag'
   : '/tag';
 ---
 
